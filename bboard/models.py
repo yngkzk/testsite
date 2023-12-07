@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 
 class IceCream(models.Model):
     flavor = models.CharField(max_length=100)
