@@ -1,5 +1,5 @@
 from django.shortcuts import render
-import requests
+from .models import IceCream, IceCreamKiosk
 
 
 def home_page(request):
@@ -12,3 +12,10 @@ def about_page(request):
 
 def contact_page(request):
     return render(request, 'contact.html')
+
+
+def test_site(request):
+    ice_creams = IceCream.objects.all()
+    ice_cream_kiosks = IceCreamKiosk.objects.all()
+    context = {'ice_creams': ice_creams}
+    return render(request, 'testsite.html', context)
