@@ -9,10 +9,10 @@ class IceCreamAdmin(admin.ModelAdmin):
 
 
 class IceCreamKioskAdmin(admin.ModelAdmin):
-    list_display = ('location', 'available_flavors', 'prices', 'working_hours', 'staff_info', 'special_offers')
+    list_display = ('location', 'prices', 'working_hours', 'staff_info', 'special_offers')
     list_display_links = ('location',)
     search_fields = ('location', 'available_flavors')
 
 
 admin.site.register(IceCream, IceCreamAdmin)
-admin.site.register(IceCreamKiosk, IceCreamKiosk)
+admin.site.register(IceCreamKiosk, IceCreamKioskAdmin)

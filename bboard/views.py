@@ -15,7 +15,7 @@ def contact_page(request):
 
 
 def test_site(request):
-    ice_creams = IceCream.objects.all()
+    ice_creams = IceCream.objects.order_by('calories')
     ice_cream_kiosks = IceCreamKiosk.objects.all()
-    context = {'ice_creams': ice_creams}
+    context = {'ice_creams': ice_creams, 'ice_cream_kiosks': ice_cream_kiosks}
     return render(request, 'testsite.html', context)
