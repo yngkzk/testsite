@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> sms view </title>
+</head>
+<body>
+    {% for message in messages %}
+        <p>
+            <strong> {{ message.sender }} </strong> {{ message.text }}
+        </p>
+    {% endfor %}
+</body>
+</html>

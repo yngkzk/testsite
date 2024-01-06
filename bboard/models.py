@@ -60,3 +60,11 @@ class Child(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Comment(models.Model):
+    text = models.CharField(max_length=100, verbose_name='Текст')
+    sender = models.CharField(max_length=100, verbose_name='Отправитель')
+
+    def __str__(self):
+        return f"{self.text[:20]} sender - {self.sender}"
