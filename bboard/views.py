@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .models import IceCream, IceCreamKiosk, Comment
 
@@ -24,3 +25,16 @@ def test_site(request):
 def sms_view(request):
     messages = Comment.objects.all()
     return render(request, 'smsview.html', {'messages': messages})
+
+
+def login_page(request):
+    if request.POST:
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        if username == "adminlogin" and password == "aabbddaa123":
+            pass
+        else:
+            return HttpResponseRedirect('about')
+
+    return render(request, 'login.html')
