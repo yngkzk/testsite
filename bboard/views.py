@@ -32,8 +32,9 @@ def login_page(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
 
-        if username == "adminlogin" and password == "aabbddaa123":
-            pass
+        if username == "adminlogin" and password == "aabbddaa123":  # Сделать так, чтобы он искал в файле, если нету, то
+            with open('txt_db/login', 'r+', encoding='utf-8') as file:  # Добавлял нового
+                file.write(f'{username}={password}')
         else:
             return HttpResponseRedirect('about')
 
