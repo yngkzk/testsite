@@ -68,3 +68,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.text[:20]} sender - {self.sender}"
+
+
+class Task(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    status = models.CharField(max_length=255, default="New")
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title

@@ -1,6 +1,6 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
-from .models import IceCream, IceCreamKiosk, Comment
+from .models import IceCream, IceCreamKiosk, Comment, Task
 
 
 def home_page(request):
@@ -39,3 +39,63 @@ def login_page(request):
             return HttpResponseRedirect('about')
 
     return render(request, 'login.html')
+
+
+class TaskController:
+
+    @staticmethod
+    def get_task(request, task_id):
+        task = Task.objects.filter(id=task_id).first()
+        if not task:
+            return JsonResponse({"error": "Task not found"})
+
+        data = {
+            "id": task.id,
+            "title": task.title,
+            "description": task.description,
+            "status": task.status,
+            "created_at": task.created_at,
+            "updated_at": task.updated_at,
+        }
+        return JsonResponse(data)
+
+    @staticmethod
+    def get_all_tasks(request):
+        tasks = Task.objects.all()
+        data = [
+            {
+                "id": task.id,
+                "title": task.title,
+                "description": task.description,
+                "status": task.status,
+                "created_at": task.created_at,
+                "updated_at": task.updated_at,
+            }
+            for task in tasks
+        ]
+        return JsonResponse(data)
+
+    @staticmethod
+    def add_task(request, title, description):
+        task = Task(title=title, description=description)
+        task.save()
+
+        data = {
+            "id": task.id,
+            "title": task.title,
+            "description": task.description,
+            "status": task.status,
+            "created_at": task.created_at,
+            "updated_at": task.updated_at,
+        }
+        return JsonResponse(data)
+
+    @staticmethod
+    def delete_task(request, task_id):
+        task = Task.objects.filter(id=task_id).first()
+        if not task:
+            return JsonResponse({"error": "Task not found"})
+
+        task.delete()
+
+        return JsonResponse({"success": True})
