@@ -1,25 +1,16 @@
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
+from django.views.generic import CreateView
+
+from .forms import IceCreamForm
 from .models import IceCream, IceCreamKiosk, Comment, Task
 
 
 def home_page(request):
-    return render(request, 'index.html')
-
-
-def about_page(request):
-    return render(request, 'about.html')
-
-
-def contact_page(request):
-    return render(request, 'contact.html')
-
-
-def test_site(request):
     ice_creams = IceCream.objects.order_by('calories')
     ice_cream_kiosks = IceCreamKiosk.objects.all()
     context = {'ice_creams': ice_creams, 'ice_cream_kiosks': ice_cream_kiosks}
-    return render(request, 'testsite.html', context)
+    return render(request, 'index.html', context)
 
 
 def sms_view(request):
@@ -99,3 +90,15 @@ class TaskController:
         task.delete()
 
         return JsonResponse({"success": True})
+
+
+class IceCreamCreateView(CreateView):
+    template_name = 'create.html'
+    form_class = IceCreamForm
+    success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['IceCream'] = IceCream.objects.all()
+        return context
+

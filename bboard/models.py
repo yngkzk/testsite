@@ -41,27 +41,6 @@ class IceCreamKiosk(models.Model):
         return f"{self.location} - {self.give_id()}"
 
 
-class Parent(models.Model):
-    name = models.CharField(max_length=100)
-    age = models.PositiveIntegerField()
-    gender = models.CharField(max_length=10)
-    address = models.CharField(max_length=200)
-    contact_info = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
-
-class Child(models.Model):
-    name = models.CharField(max_length=100)
-    age = models.PositiveIntegerField()
-    school = models.CharField(max_length=100)
-    parent = models.ForeignKey(Parent, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-
 class Comment(models.Model):
     text = models.CharField(max_length=100, verbose_name='Текст')
     sender = models.CharField(max_length=100, verbose_name='Отправитель')

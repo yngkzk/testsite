@@ -1,91 +1,31 @@
 {% load static %}
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="{% static 'script.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <title>Document</title>
+    <title>Ice Cream List</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'contacts' %}">Contacts</a>
-            </li>
-              <li class="nav-item">
-              <a class="nav-link" href="{% url 'about' %}">About</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <section id="hero">
-        <div class="hero-content">
-            <h1>Innovative Solutions</h1>
-            <p>Мы предлагаем инновационные решения для вашего бизнеса</p>
-            <a href="#contact" class="cta-button">СВЯЖИТЕСЬ С НАМИ</a>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="container">
-            <h2>О НАС</h2>
-            <p>Привет! Мы - Innovative Solutions - команда экспертов, специализирующихся на создании инновационных решений для бизнеса. Наша цель - помочь вашей компании улучшить эффективность и достичь успеха в современном цифровом мире.</p>
-        </div>
-    </section>
-
-    <section id="services">
-        <div class="container">
-            <h2>УСЛУГИ</h2>
-            <ul>
-                <li>Веб-разработка</li>
-                <li>Мобильное приложение</li>
-                <li>Цифровой маркетинг</li>
-                <li>ИТ-консультации</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="portfolio">
-        <div class="container">
-            <h2>ПОРТФОЛИО</h2>
-            <div class="portfolio-item">
-                <h3>Проект 1</h3>
-                <p>Описание проекта 1</p>
-            </div>
-            <div class="portfolio-item">
-                <h3>Проект 2</h3>
-                <p>Описание проекта 2</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <h2>КОНТАКТЫ</h2>
-            <p>Свяжитесь с нами, чтобы узнать больше о наших услугах и начать работу над вашим проектом.</p>
-            <form>
-                <input type="text" placeholder="Ваше имя" required>
-                <input type="email" placeholder="Ваш Email" required>
-                <textarea placeholder="Сообщение"></textarea>
-                <button type="submit">Отправить</button>
-            </form>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2022 Innovative Solutions. Все права защищены чатом GPT ;p.</p>
-    </footer>
+    <h1>Ice Creams</h1>
+    <a href="{% url 'add' %}"> Добавить </a>
+    <ul>
+    {% for ice_cream in ice_creams %}
+        <b style="font-size: 32px">{{ ice_cream.flavor }}</b>
+        <p>{{ ice_cream.portion_size }}</p>
+        <p>{{ ice_cream.ingredients }}</p>
+        <p>{{ ice_cream.price }}</p>
+        <p>{{ ice_cream.calories }}</p>
+    {% endfor %}
+    </ul>
+    <h1>Ice Cream Kiosks</h1>
+    <ul>
+    {% for ice_cream_kiosk in ice_cream_kiosks %}
+        <b style="font-size: 32px">{{ ice_cream_kiosk.location }}</b>
+        <p>{{ ice_cream_kiosk.available_flavors }}</p>
+        <p>{{ ice_cream_kiosk.prices }}</p>
+        <p>{{ ice_cream_kiosk.working_hours }}</p>
+        <p>{{ ice_cream_kiosk.staff_info }}</p>
+        <p>{{ ice_cream_kiosk.special_offers }}</p>
+    {% endfor %}
+    </ul>
 </body>
 </html>
