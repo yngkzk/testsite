@@ -9,7 +9,9 @@
     <a href="{% url 'add' %}"> Добавить </a>
     <ul>
     {% for ice_cream in ice_creams %}
-        <b style="font-size: 32px">{{ ice_cream.flavor }}</b>
+        <p style="font-size: 32px">
+            <a href="{% url 'detail' pk=ice_cream.pk %}">{{ ice_cream.flavor }}</a>
+        </p>
         <p>{{ ice_cream.portion_size }}</p>
         <p>{{ ice_cream.ingredients }}</p>
         <p>{{ ice_cream.price }}</p>
@@ -19,7 +21,9 @@
     <h1>Ice Cream Kiosks</h1>
     <ul>
     {% for ice_cream_kiosk in ice_cream_kiosks %}
-        <b style="font-size: 32px">{{ ice_cream_kiosk.location }}</b>
+        <p style="font-size: 32px">
+            {{ ice_cream_kiosk.location }}
+        </p>
         <p>{{ ice_cream_kiosk.available_flavors }}</p>
         <p>{{ ice_cream_kiosk.prices }}</p>
         <p>{{ ice_cream_kiosk.working_hours }}</p>
